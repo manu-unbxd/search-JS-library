@@ -21,6 +21,7 @@
     "semantic-release": "semantic-release",
     "commit": "cz",
     "test":"webpack ---config ./webpack/webpack.dev.build.js"
+    "tests": "mocha -r esm  --require test/init.js --require ignore-styles -r jsdom-global/register ./test/*.spec.js"
   },
   "devDependencies": {
     "@babel/core": "^7.12.13",
@@ -41,6 +42,9 @@
     "babel-minify-webpack-plugin": "^0.3.1",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "commitizen": "^4.2.3",
+    "babelify": "^10.0.0",
+    "browserify": "^17.0.0",
+    "chai": "^4.2.0",
     "compression-webpack-plugin": "^3.1.0",
     "css-loader": "^3.4.2",
     "cz-conventional-changelog": "^3.2.0",
@@ -56,14 +60,20 @@
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
+    "esm": "^3.2.25",
     "html-loader": "^0.5.5",
     "html-webpack-inline-source-plugin": "0.0.10",
     "html-webpack-plugin": "^3.2.0",
     "http-server": "^0.12.1",
     "husky": "^4.3.8",
+    "ignore-styles": "^5.0.1",
+    "isomorphic-fetch": "^3.0.0",
     "jsdoc": "^3.6.4",
+    "jsdom": "16.4.0",
+    "jsdom-global": "3.0.2",
     "minami": "^1.2.3",
     "mini-css-extract-plugin": "^0.9.0",
+    "node-fetch": "^2.6.1",
     "node-forge": ">=0.10.0",
     "node-sass": "^4.13.1",
     "path": "^0.12.7",
@@ -71,6 +81,7 @@
     "prettier": "^1.19.1",
     "sass-loader": "^8.0.2",
     "semantic-release": "^17.3.7",
+    "sequelize": "^6.3.5",
     "style-loader": "^1.1.3",
     "terser-webpack-plugin": "^4.1.0",
     "uglifyjs-webpack-plugin": "^2.2.0",
@@ -91,47 +102,7 @@
     "@unbxd-ui/unbxd-search-core": "0.3.1",
     "babel-polyfill": "^6.26.0",
     "babel-runtime": "^6.26.0",
-    "element-dataset": "^2.2.6"
-  },
-  "release": {
-    "branches": [
-        "master",
-        "next",
-        {
-            "name": "alpha",
-            "prerelease": true
-        },
-        {
-            "name": "beta",
-            "prerelease": true
-        }
-    ],
-    "plugins": [
-        "@semantic-release/commit-analyzer",
-        "@semantic-release/release-notes-generator",
-        "@semantic-release/changelog",
-        "@semantic-release/npm",
-        [
-            "@semantic-release/git",
-            {
-                "assets": [
-                    "package.json",
-                    "CHANGELOG.md"
-                ],
-                "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
-            }
-        ],
-        "@semantic-release/github"
-    ]
-  },
-  "config": {
-    "commitizen": {
-        "path": "./node_modules/cz-conventional-changelog"
-    }
-  },
-  "husky": {
-      "hooks": {
-          "pre-commit": "yarn build:prod"
-      }
+    "element-dataset": "^2.2.6",
+    "mocha": "^8.2.0",
   }
 }
