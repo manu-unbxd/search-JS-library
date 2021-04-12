@@ -20,6 +20,8 @@ const { JSDOM } = require("jsdom");
 import testFacets from "./modules/facets/index.spec.js";
 import testProducts from "./modules/products/index.spec.js";
 import testSort from "./modules/sort/index.spec.js";
+import testPagination from "./modules/pagination/index.spec.js";
+import testPageSize from "./modules/pagesize/index.spec.js"
   
 const html = `<!DOCTYPE html>
 <html lang="en">
@@ -96,6 +98,14 @@ global.testPage = page;
 global.window = global.testPage.window;
 global.document = global.testPage.window.document;
 global.asyncStart = false;
+global.pageSizeArray = [
+    8,
+    12,
+    16,
+    20,
+    24
+];
+global.selectedPage = 12;
 
 
 
@@ -172,6 +182,29 @@ global.testUnbxd = new UnbxdSearch({
             swatchColors: "color"
         }
     },
+    pagesize: {
+        el: document.getElementById("changeNoOfProducts"),
+        options:global.pageSizeArray,
+        pageSize:global.selectedPage,
+        template:function(selected, pagesize){
+            const {
+                UNX_pagesize
+            } = this.testIds;
+            let ui = `<div  class="UNX-select-pagesize ">`;
+            pagesize.options.forEach((opt,i)=>{
+                const tId = `data-test-id="${UNX_pagesize}${i+1}"`;
+                if(selected == opt) {
+                    ui+=`<button selected ${tId} class="${pagesize.pageSizeClass} ${pagesize.selectedPageSizeClass}" id="${opt}">${opt}</button>`;
+                } else{
+                    ui+=`<button ${tId} class="${pagesize.pageSizeClass}" id="${opt}">${opt}</button>`;
+                }
+                
+            });
+            ui+= `</div>`
+            return `<div class="UNX-pagesize-block">${ui}</div>`;
+        },
+        action:"click"
+    },
     onEvent:function(instance, type, data) {
 
         console.log(type,data," type and data")
@@ -213,6 +246,8 @@ describe("start search from search box", () => {
             testFacets();
             testProducts();
             testSort();
+            testPagination();
+            testPageSize();
         }, function(error) {
             assert.fail(error);
             done();

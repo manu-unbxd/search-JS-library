@@ -58,6 +58,19 @@ const testFacets = ()=> {
             expect(firstElementItem).to.be.false;
         });
 
+        it('click on the first facet header',  function() {
+            const firstElementItem = global.testUnbxd.facetsWrapper.querySelector(`.UNX-facet-header`);
+            firstElementItem.click();
+            const isClosed = firstElementItem.classList.contains("UNX-facet-close");
+            expect(isClosed).to.be.true;
+        });
+        it('click on the first facet header',  function() {
+            const firstElementItem = global.testUnbxd.facetsWrapper.querySelector(`.UNX-facet-header`);
+            firstElementItem.click();
+            const isOpen = firstElementItem.classList.contains("UNX-facet-open");
+            expect(isOpen).to.be.true;
+        });
+
     });
 
     
