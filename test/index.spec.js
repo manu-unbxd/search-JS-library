@@ -21,7 +21,8 @@ import testFacets from "./modules/facets/index.spec.js";
 import testProducts from "./modules/products/index.spec.js";
 import testSort from "./modules/sort/index.spec.js";
 import testPagination from "./modules/pagination/index.spec.js";
-import testPageSize from "./modules/pagesize/index.spec.js"
+import testPageSize from "./modules/pagesize/index.spec.js";
+import testProductViewType from "./modules/productViewType/index.spec.js";
   
 const html = `<!DOCTYPE html>
 <html lang="en">
@@ -248,6 +249,7 @@ describe("start search from search box", () => {
             testSort();
             testPagination();
             testPageSize();
+            testProductViewType();
         }, function(error) {
             assert.fail(error);
             done();

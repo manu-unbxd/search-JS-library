@@ -105,9 +105,9 @@ btnEls.forEach(item => {
     item.addEventListener("click", toggleMobileFacets)
 })
 window.unbxdSearch = new UnbxdSearch({
-    siteKey: "demo-unbxd700181503576558",
-    apiKey: "fb853e3332f2645fac9d71dc63e09ec1",
-    hashMode: true,
+    siteKey: "demo-german-unbxd809051586180937",
+    apiKey: "16e3cf8d510c50106d64f1ebb919b34e",
+    hashMode: false,
     updateUrls: true,
     searchBoxEl: document.getElementById("unbxdInput"),
     searchTrigger: "click",
@@ -239,7 +239,7 @@ window.unbxdSearch.updateConfig({
         }
     },
     pagination: {
-        type: 'INFINITE_SCROLL',
+        type: 'FIXED_PAGINATION',
         el: document.querySelector("#clickScrollContainer"),
         onPaginate: function(data) {}
     },
@@ -247,7 +247,25 @@ window.unbxdSearch.updateConfig({
         el: document.getElementById("breadcrumpContainer")
     },
     pagesize: {
-        el: document.getElementById("changeNoOfProducts")
+        el: document.getElementById("changeNoOfProducts"),
+        template:function(selected, pagesize){
+            const {
+                UNX_pagesize
+            } = this.testIds;
+            let ui = `<div  class="UNX-select-pagesize ">`;
+            pagesize.options.forEach((opt,i)=>{
+                const tId = `data-test-id="${UNX_pagesize}${i+1}"`;
+                if(selected == opt) {
+                    ui+=`<button selected ${tId} class="${pagesize.pageSizeClass} ${pagesize.selectedPageSizeClass}" id="${opt}">${opt}</button>`;
+                } else{
+                    ui+=`<button ${tId} class="${pagesize.pageSizeClass}" id="${opt}">${opt}</button>`;
+                }
+                
+            });
+            ui+= `</div>`
+            return `<div class="UNX-pagesize-block">${ui}</div>`;
+        },
+        action:"click"
     },
 
     sort: {

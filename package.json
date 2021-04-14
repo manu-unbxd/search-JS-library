@@ -20,7 +20,7 @@
     "build:dev": "webpack ---config ./webpack/webpack.dev.build.js",
     "semantic-release": "semantic-release",
     "commit": "cz",
-    "test":"webpack ---config ./webpack/webpack.dev.build.js"
+    "test":"webpack ---config ./webpack/webpack.dev.build.js",
     "tests": "mocha -r esm  --require test/init.js --require ignore-styles -r jsdom-global/register ./test/*.spec.js"
   },
   "devDependencies": {
@@ -103,6 +103,6 @@
     "babel-polyfill": "^6.26.0",
     "babel-runtime": "^6.26.0",
     "element-dataset": "^2.2.6",
-    "mocha": "^8.2.0",
+    "mocha": "^8.2.0"
   }
 }
